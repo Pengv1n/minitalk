@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minitalk.h"
+#include "minitalk.h"
 
 void	ft_putstr_fd(char *msg, int fd)
 {

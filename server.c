@@ -12,10 +12,10 @@
 
 #include "minitalk.h"
 
-void put_char(int b)
+void	put_char(int b)
 {
-	static int i = 0;
-	static unsigned char c = 0;
+	static int				i = 0;
+	static unsigned char	c = 0;
 
 	c = c | (b << i);
 	i++;
@@ -23,7 +23,7 @@ void put_char(int b)
 	{
 		if (c == '\0')
 		{
-			write(1, "\n",1);
+			write(1, "\n", 1);
 			write(1, &c, 1);
 		}
 		else
@@ -33,7 +33,7 @@ void put_char(int b)
 	}
 }
 
-void get_pid(int sig, siginfo_t *info, void *context)
+void	get_pid(int sig, siginfo_t *info, void *context)
 {
 	(void)context;
 	if (sig == SIGUSR1)
@@ -45,7 +45,7 @@ void get_pid(int sig, siginfo_t *info, void *context)
 
 int	main(void)
 {
-	int	pid;
+	int					pid;
 	struct sigaction	sigact;
 
 	pid = getpid();

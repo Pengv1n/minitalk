@@ -1,8 +1,20 @@
-# include "minitalk.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aregenia <aregenia@student.21-school.      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/26 01:14:08 by aregenia          #+#    #+#             */
+/*   Updated: 2021/11/26 01:14:13 by aregenia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static int g_pause = 0;
+#include "minitalk.h"
 
-void error(char *msg)
+static int	g_pause = 0;
+
+void	error(char *msg)
 {
 	ft_putstr_fd("Error!\n", 2);
 	if (msg)
@@ -10,17 +22,17 @@ void error(char *msg)
 	exit(EXIT_FAILURE);
 }
 
-void    ft_handler(int sig)
+void	ft_handler(int sig)
 {
 	if (sig == SIGUSR2)
 		g_pause = 1;
 	return ;
 }
 
-void    send_msg(char *msg, int pid)
+void	send_msg(char *msg, int pid)
 {
-	int b;
-	int i;
+	int	b;
+	int	i;
 
 	i = -1;
 	while (msg[++i])
@@ -36,7 +48,7 @@ void    send_msg(char *msg, int pid)
 					error("Server not found!\n");
 			}
 			else
-				if (kill(pid,SIGUSR1) == -1)
+				if (kill(pid, SIGUSR1) == -1)
 					error("Server not found!\n");
 			while (!g_pause)
 				;
@@ -45,10 +57,10 @@ void    send_msg(char *msg, int pid)
 	}
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	int pid;
-	int b;
+	int	pid;
+	int	b;
 
 	if (argc != 3)
 		error("Wrong number of arguments.\n");
